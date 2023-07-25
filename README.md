@@ -1,2 +1,2 @@
-# Webinators_EasyBuy_Node
+# Webinators_EasyBuy
  Java Script Project 
