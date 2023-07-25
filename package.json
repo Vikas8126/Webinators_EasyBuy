@@ -1,6 +1,6 @@
 {
   "name": "webinators_easybuy_node",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Java Script Project",
   "main": "index.js",
   "scripts": {
