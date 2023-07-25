@@ -1,0 +1,24 @@
+{
+  "name": "webinators_easybuy_node",
+  "version": "1.0.0",
+  "description": "Java Script Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vikas8126/Webinators_EasyBuy.git"
+  },
+  "author": "Vikas_yadav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vikas8126/Webinators_EasyBuy/issues"
+  },
+  "homepage": "https://github.com/Vikas8126/Webinators_EasyBuy#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "hbs": "^4.2.0",
+    "mongoose": "^7.4.1"
+  }
+}
