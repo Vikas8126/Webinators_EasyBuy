@@ -34,9 +34,9 @@ app.get('/signup',(req, res)=>{
     res.render('signup')
 })
 
-// app.get('/laptop',(req, res)=>{
-//     res.render('laptop')
-// })
+app.get('/cart',(req, res)=>{
+    res.render('cart')
+})
 
 app.get('/desktop',(req, res)=>{
     res.render('desktop')
@@ -54,15 +54,26 @@ app.get('/home',(req, res)=>{
     res.render('home')
 })
 
+app.get('/profile',(req, res)=>{
+    res.render('profile')
+})
+
 app.post('/signup',async(req, res)=>{
     const data ={
         name: req.body.fname + ' ' + req.body.lname,
         password: req.body.password
     }
     console.log(data)
-    alert("Signup Success! You can login now")
-    await collection.insertMany([data])
-    res.render('login')
+    const name = req.body.fname + ' ' + req.body.lname
+    const check = await collection.findOne({name})
+    if(check){
+        alert("User already exsist please try another name")
+    }
+    else{
+        alert("Signup Success! You can login now")
+        await collection.insertMany([data])
+        res.render('login')
+    }
 })
 
 app.post('/login',async(req, res)=>{
@@ -84,8 +95,6 @@ app.post('/login',async(req, res)=>{
 app.get("/laptop", async (request, response) => {
     try {
         products = await product.find({})
-        console.log(products)
-        // response.send(product)
         response.render('laptop',{products : products})
         
     } catch{

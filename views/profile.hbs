@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <script>
+    window.onload = function(){
+        var userName = localStorage.getItem("uname")
+            document.getElementById("loggedUser").innerHTML = "Welcome " + userName
+    }
+
+    function modelCheck(){
+        var userName = localStorage.getItem("uname")
+        if(userName != null && userName !="Guest"){
+            location.href=  "profile"
+        }else{
+            location.href=  "login"
+        }
+    }
+
+    function logOut() {
+        localStorage.setItem("uname", "Guest")
+        var userName = localStorage.getItem("uname")
+        document.getElementById("loggedUser").innerHTML = "Welcome " + userName
+        cart=[]
+        sessionStorage.setItem('shoppingCart', JSON.stringify(cart));
+        location.href = "home"
+    }
+
+    function cart(){
+        var userName = localStorage.getItem("uname")
+        if(userName == null || userName =="Guest"){
+            location.href=  "login"
+        }else{
+            location.href=  "cart"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div class="fixed-header">
+        <nav>
+            <p1>Easy Buy</p1>
+            <a href="home">Home</a>
+            <a href="laptop">Laptops</a>
+            <a href="desktop">Desktops</a>
+            <a href="about">About</a>
+            <a href="contact">Contact Us</a>
+            <span class="notify-badge" id="cartProCount">0</span>
+            <img class="avatar" src="public/image/cart.png" onclick="cart()" alt="">
+            <p id="loggedUser" value="Login/Signup"></p>
+            <img class="avatar" onclick="modelCheck()" src="public/image/profile.png" alt="">
+        </nav>
+    </div>
+
+    <div class="container" style="width: 100%!important;">
+        <div class="main-content">
+            <!-- Page content -->
+            <div class="container-fluid mt--7">
+                <div class="row">
+                    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                        <div class="card card-profile shadow">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-3 order-lg-2">
+                                    <div class="card-profile-image">
+                                        <a href="#">
+                                            <img src="public/image/profile.png" class="rounded-circle">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-0 pt-md-4">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                            <div>
+                                                <span class="heading">Total Orders</span>
+                                                <span class="description">12</span>
+                                            </div>
+                                            <div>
+                                                <span class="heading">Royalty points</span>
+                                                <span class="description">1,736</span>
+                                            </div>
+                                            <div>
+                                                <span class="heading">Reviews</span>
+                                                <span class="description">9</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h3>
+                                        Vikas Yadav<span class="font-weight-light">, 26</span>
+                                    </h3>
+                                    <div class="h5 font-weight-300">
+                                        <i class="ni location_pin mr-2"></i>Clydesdale Dr. , Toronto
+                                    </div>
+                                    <div>
+                                        <i class="ni education_hat mr-2"></i>Silver Customer
+                                    </div>
+                                    <div class="col-4 text-center" style="margin-top: 40px;">
+                                        <a href="#!" class="btn btn-primary" onclick="logOut()">Log Out</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 order-xl-1">
+                        <div class="card bg-secondary shadow">
+                            <div class="card-header bg-white border-0">
+                                <div class="row align-items-center">
+                                    <div class="col-8">
+                                        <h3 class="mb-0">My account</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <h6 class="heading-small text-muted mb-4">User information</h6>
+                                    <div class="pl-lg-4">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group focused">
+                                                    <label class="form-control-label"
+                                                        for="input-username">Username</label>
+                                                    <input type="text" id="input-username"
+                                                        class="form-control form-control-alternative"
+                                                        placeholder="Username" value="Vikas.yadav">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-email">Email
+                                                        address</label>
+                                                    <input type="email" id="input-email"
+                                                        class="form-control form-control-alternative"
+                                                        placeholder="vikas.yadav@gmail.com">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group focused">
+                                                    <label class="form-control-label" for="input-first-name">First
+                                                        name</label>
+                                                    <input type="text" id="input-first-name"
+                                                        class="form-control form-control-alternative"
+                                                        placeholder="First name" value="Vikas">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group focused">
+                                                    <label class="form-control-label" for="input-last-name">Last
+                                                        name</label>
+                                                    <input type="text" id="input-last-name"
+                                                        class="form-control form-control-alternative"
+                                                        placeholder="Last name" value="Yadav">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
+                                    <!-- Address -->
+                                    <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                                    <div class="pl-lg-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group focused">
+                                                    <label class="form-control-label"
+                                                        for="input-address">Address</label>
+                                                    <input id="input-address"
+                                                        class="form-control form-control-alternative"
+                                                        placeholder="Home Address"
+                                                        value="Clydesdale Dr. , North York, Toronto" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group focused">
+                                                    <label class="form-control-label" for="input-city">City</label>
+                                                    <input type="text" id="input-city"
+                                                        class="form-control form-control-alternative" placeholder="City"
+                                                        value="Toronto">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group focused">
+                                                    <label class="form-control-label"
+                                                        for="input-country">Country</label>
+                                                    <input type="text" id="input-country"
+                                                        class="form-control form-control-alternative"
+                                                        placeholder="Country" value="Canada">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-country">Postal
+                                                        code</label>
+                                                    <input type="number" id="input-postal-code"
+                                                        class="form-control form-control-alternative"
+                                                        placeholder="M2J 3N2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-center">
+                                            <a href="#!" class="btn btn-primary">Save Changes</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="aboutUsSection">
+        <div class="row">
+            <div class="column">
+                <h4>About Us</h4>
+                <h5>Contact Us </h5>
+                <h5>Career</h5>
+                <h5>Investor Info</h5>
+                <h5>Store Locator</h5>
+            </div>
+            <div class="column">
+                <h4>Ways to buy </h4>
+                <h5>Shop online</h5>
+                <h5>Call an EasyBuy rep</h5>
+                <h5>Find a reseller</h5>
+            </div>
+            <div class="column">
+                <h4>Support</h4>
+                <h5>Download drivers </h5>
+                <h5>Support & troubleshooting</h5>
+                <h5>Community</h5>
+                <h5>Check repair status</h5>
+            </div>
+            <div class="column">
+                <h4>EasyBuy Partners</h4>
+                <h5>EasyBuy Amplify Partner Program</h5>
+                <h5>EasyBuy Partner Portal</h5>
+                <h5>Developers</h5>
+            </div>
+        </div>
+    </div>
+    <div class="fixed-footer">
+        <div class="nav">
+            <!-- <p href="contact.html">Copyright &copy; 2016 Easy Buy</p> -->
+            <a target="_blank" href="https://www.facebook.com" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-youtube"></a>
+        </div>
+    </div>
+</body>
+
+</html>

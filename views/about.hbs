@@ -12,65 +12,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="index.js"></script>
     <script>
-    // Get the modal
-    var modal = document.getElementById('id01');
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+        window.onload = function(){
+            var userName = localStorage.getItem("uname")
+                document.getElementById("loggedUser").innerHTML = "Welcome " + userName
         }
-    }
-    window.onload = function(){
-        var userName = localStorage.getItem("uname")
-            document.getElementById("loggedUser").innerHTML = "Welcome " + userName
-    }
 
-    function getLoggedInUser(loginForm) {
-    var userName = 'Vikas'
-    if ((loginForm.uname.value=='vikas' || loginForm.uname.value=='Vikas') && (loginForm.psw.value=='12345')) {
-        window.alert("Successfully Logged in as Vikas")
-        var passwrd = loginForm.psw.value
-        var userName = document.getElementById("uname").value
-        localStorage.setItem("passwrd", passwrd)
-        localStorage.setItem("uname", userName)
-        document.getElementById("loggedUser").innerHTML = "Welcome " + userName
-        console.log(userName);
-
-    }else{
-        window.alert("Wrong Password! Please try again.")
-    }
-    var modal = document.getElementById('id01');
-    modal.style.display = "none";
-}
-
-    function modelCheck(){
-        var userName = localStorage.getItem("uname")
-        if(userName != "Guest"){
-            location.href=  "profile.html"
-        }else{
-            document.getElementById('id01').style.display='block'
+        function modelCheck(){
+            var userName = localStorage.getItem("uname")
+            if(userName != null && userName !="Guest"){
+                location.href=  "profile"
+            }else{
+                location.href=  "login"
+            }
         }
-    }
 
-    function tolaptop(){
-        location.href = "laptop.html"
-    }
-
-    function todesktop(){
-        location.href = "computer.html"
-    }
+        function cart(){
+            var userName = localStorage.getItem("uname")
+            console.log("m herereer")
+            if(userName == null || userName == "Guest"){
+                location.href=  "login"
+            }else{
+                location.href=  "cart"
+            }
+        }
 
     </script>
-  <style>
-  .carousel-inner > .item > img,
-  .carousel-inner > .item > a > img {
-    width: 100%;
-    margin: auto;
-  }
-  </style>
+    <style>
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+        width: 100%;
+        margin: auto;
+    }
+    </style>
     <title>Document</title>
 </head>
 
@@ -84,99 +58,10 @@
                 <a href="about">About</a>
                 <a href="contact">Contact Us</a>
                 <span class="notify-badge" id="cartProCount">0</span>
-                <img class="avatar" src="/publicimage/cart.png" onclick="routeToCart()" alt="">
+                <img class="avatar" src="/public/image/cart.png" onclick="cart()" alt="">
                 <p id="loggedUser" value="Login/Signup"></p>
                 <img class="avatar" onclick="modelCheck()" src="/public/image/profile.png" alt="">
             </nav>
-    </div>
-    <div id="id01" class="modal">
-        <form class="modal-content animate" name="loginForm" action="index.html" method="post">
-          <div class="imgcontainer">
-            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-            <img src="/publicimage/profile.png" alt="Avatar" class="avatar1">
-          </div>
-          <div class="login_container">
-            <label for="uname" ><b>Username</b></label>
-            <input type="text" id="uname" placeholder="Enter Username" name="uname" required>
-      
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" id ="psw" required>
-              
-            <button type="button" onclick="getLoggedInUser(loginForm)" value="login">Login</button>
-            <label>
-              <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-          </div>
-          <div class="login_container" style="background-color:#f1f1f1">
-            <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button> -->
-            <span class="signupLink" >Dont have an account? <a onclick="signupform()" >Sign Up here</a></span>
-          </div>
-        </form>
-      </div>
-      <div id="id02" class="modal_signup">
-        <form class="modal-content animate" name="signupForm" action="index.html" method="post">
-          <div class="imgcontainer">
-            <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-            <img src="/publicimage/profile.png" alt="Avatar" class="avatar1">
-          </div>
-          <div class="login_container">
-            <label for="fname" ><b>First Name</b></label>
-            <input type="text" id="fname" placeholder="Enter First Name" name="fname" required>
-
-            <label for="lname" ><b>Last Name</b></label>
-            <input type="text" id="lname" placeholder="Enter Last Name" name="lname" required>
-
-            <label for="dob" ><b>Date of birth</b></label>
-            <input type="date" id="age" placeholder="Enter Date of birth" name="age" required>
-      
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" id ="psw" required>
-
-            <label for="rpsw"><b>Re Enter Password</b></label>
-            <input type="password" placeholder="Enter Password" name="rpsw" id ="rpsw" required>
-              
-            <button type="button" onclick="getsignedupUser(signupForm)" value="login">Sign Up</button>
-          </div>
-          <div class="login_container" style="background-color:#f1f1f1">
-            <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button> -->
-            <span class="signupLink" >Click to <a onclick="signinform()" >login</a></span>
-          </div>
-        </form>
-      </div>
-      <div class="modal" id="cart" role="dialog" style="display: none;">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="cart-modal-content">
-                <div class="modal-header">
-                    <h5 class="cart-modal-title" id="exampleModalLabel">Cart Items</h5>
-                    <button type="button" class="close" onclick="closeCart()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="cart-modal-body" style="overflow-y:scroll;">
-                    <div id= "cartCard1" class='cart_product_card'>
-                        <center><img style='width: 25%;margin-left: -556px;' src='/public/image/id1.png'>
-                            <h3 id='proName' style="margin-top: -110px;margin-left: 65px;">2021 Apple MacBook Pro</h3>
-                            <p style='color: red;'>13% off</p>
-                            <h5>Price: $2499</h5>
-                            <button class='removecartButton' onclick="removeFromCart('cartCard1')">Remove from Cart</button>
-                        </center>
-                    </div>
-                    <div   id= "cartCard2" class='cart_product_card'>
-                        <center><img style='width: 25%;margin-left: -556px;' src='/public/image/hp-aio.png'>
-                            <h3 id='proName' style="margin-top: -110px;margin-left: 65px;">HP 24 inch All-in-One</h3>
-                            <p style='color: red;'>3% off</p>
-                            <h5>Price: $1029</h5>
-                            <button class='removecartButton' onclick="removeFromCart('cartCard2')">Remove from Cart</button>
-                        </center>
-                    </div>
-                    <div>Total price: $<span class="total-cart"></span></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="closeCart()" style="width: 20%!important;" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="closeCart()" style="width: 20%!important;">Order now</button>
-                </div>
-            </div>
-        </div>
     </div>
       <div class="container">
         <section>
@@ -187,19 +72,19 @@
                 <div class="column">
                     <div class="about_container">
                         <img src="/public/image/laptops.webp" alt="Laptops">
-                        <button #href="laptop.html" onclick="tolaptop()" class="btn">Laptops</button>
+                        <a href="laptop" class="btn">Laptops</a>
                     </div>
                 </div>
                 <div class="column">
                     <div class="about_container">
                         <img src="/public/image/buymoresavemore.jpg" alt="Desktops">
-                        <button #href="laptop.html" onclick="todesktop()" class="btn">Desktops</button>
+                        <a href="desktop" class="btn">Desktops</a>
                     </div>
                 </div>
                 <div class="column">
                     <div class="about_container">
                         <img src="/public/image/accessories.jpg" alt="Phones">
-                        <button #href="laptop.html" class="btn">Accessories</button>
+                        <a href="laptop" class="btn">Accessories</a>
                     </div>
                 </div>
             </div>
@@ -294,15 +179,6 @@
             <a href="#" class="fa fa-youtube"></a>
         </div>
     </div>
-    <script>
-        function onload(){
-  cart = JSON.parse(sessionStorage.getItem('shoppingCart'));
-  document.getElementById("cartProCount").innerHTML = cart.length
-}
-if( document.getElementById("cartProCount").innerHTML != null){
-    onload();
-}
-    </script>
 </body>
 
 </html>

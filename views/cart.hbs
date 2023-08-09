@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <script>
+    window.onload = function(){
+        var userName = localStorage.getItem("uname")
+            document.getElementById("loggedUser").innerHTML = "Welcome " + userName
+    }
+
+    function modelCheck(){
+        var userName = localStorage.getItem("uname")
+        if(userName != null && userName !="Guest"){
+            location.href=  "profile"
+        }else{
+            location.href=  "login"
+        }
+    }
+
+    function cart(){
+            var userName = localStorage.getItem("uname")
+            console.log("m herereer")
+            if(userName == null || userName == "Guest"){
+                location.href=  "login"
+            }else{
+                location.href=  "cart"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="fixed-header">
+            <nav>
+                <p1>Easy Buy</p1>
+                <a href="home">Home</a>
+                <a href="laptop">Laptops</a>
+                <a href="desktop">Desktops</a>
+                <a href="about">About</a>
+                <a href="contact">Contact Us</a>
+                <span class="notify-badge" id="cartProCount" >0</span>
+                <img class="avatar" src="/public/image/cart.png" onclick="cart()" alt="">
+                <p id="loggedUser" value="Login/Signup"></p>
+                <img class="avatar" onclick="modelCheck()" src="/public/image/profile.png" alt="">
+            </nav>
+    </div>
+                <div class="modal-header">
+                    <h5 class="cart-modal-title" id="exampleModalLabel">Cart Items</h5>
+                    <button type="button" class="close" onclick="closeCart()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="cart-modal-body" style="overflow-y:scroll;">
+                    <div id= "cartCard1" class='cart_product_card'>
+                        <center><img style='width: 25%;margin-left: -556px;' src='/public/image/id1.png'>
+                            <h3 id='proName' style="margin-top: -110px;margin-left: 65px;">2021 Apple MacBook Pro</h3>
+                            <p style='color: red;'>13% off</p>
+                            <h5>Price: $2499</h5>
+                            <button class='removecartButton' onclick="removeFromCart('cartCard1')">Remove from Cart</button>
+                        </center>
+                    </div>
+                    <div   id= "cartCard2" class='cart_product_card'>
+                        <center><img style='width: 25%;margin-left: -556px;' src='/public/image/hp-aio.png'>
+                            <h3 id='proName' style="margin-top: -110px;margin-left: 65px;">HP 24 inch All-in-One</h3>
+                            <p style='color: red;'>3% off</p>
+                            <h5>Price: $1029</h5>
+                            <button class='removecartButton' onclick="removeFromCart('cartCard2')">Remove from Cart</button>
+                        </center>
+                    </div>
+                    <div>Total price: $<span class="total-cart"></span></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeCart()" style="width: 20%!important;" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="closeCart()" style="width: 20%!important;">Order now</button>
+                </div>
+            
+    <div class="aboutUsSection">
+        <div class="row">
+            <div class="column">
+                <h4>About Us</h4>
+                <h5>Contact Us </h5>
+                <h5>Career</h5>
+                <h5>Investor Info</h5>
+                <h5>Store Locator</h5>
+            </div>
+            <div class="column">
+                <h4>Ways to buy </h4>
+                <h5>Shop online</h5>
+                <h5>Call an EasyBuy rep</h5>
+                <h5>Find a reseller</h5>
+            </div>
+            <div class="column">
+                <h4>Support</h4>
+                <h5>Download drivers </h5>
+                <h5>Support & troubleshooting</h5>
+                <h5>Community</h5>
+                <h5>Check repair status</h5>
+            </div>
+            <div class="column">
+                <h4>EasyBuy Partners</h4>
+                <h5>EasyBuy Amplify Partner Program</h5>
+                <h5>EasyBuy Partner Portal</h5>
+                <h5>Developers</h5>
+            </div>
+        </div>
+    </div>
+    <div class="fixed-footer">
+        <div class="nav">
+            <!-- <p href="contact.html">Copyright &copy; 2016 Easy Buy</p> -->
+            <a target="_blank" href="https://www.facebook.com" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-youtube"></a>
+        </div>
+    </div>
+</body>
+</html>

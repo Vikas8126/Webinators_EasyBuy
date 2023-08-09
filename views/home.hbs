@@ -12,6 +12,36 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Document</title>
+    <script>
+    window.onload = function(){
+        var userName = localStorage.getItem("uname")
+        console.log(userName)
+            document.getElementById("loggedUser").innerHTML = "Welcome " + userName
+    }
+
+    function modelCheck(){
+        var userName = localStorage.getItem("uname")
+        if(userName != null && userName !="Guest"){
+            location.href=  "profile"
+        }else{
+            location.href=  "login"
+        }
+    }
+
+    function cart(){
+        var userName = localStorage.getItem("uname")
+        if(userName == null || userName =="Guest"){
+            location.href=  "login"
+        }else{
+            location.href=  "cart"
+        }
+    }
+
+    function addToCart(){
+        document.getElementById("cartProCount").innerHTML = 2
+    }
+
+    </script>
 </head>
 <body>
     <div class="fixed-header">
@@ -23,9 +53,9 @@
                 <a href="about">About</a>
                 <a href="contact">Contact Us</a>
                 <span class="notify-badge" id="cartProCount" >0</span>
-                <img class="avatar" src="/public/image/cart.png" onclick="login" alt="">
+                <img class="avatar" src="/public/image/cart.png" onclick="cart()" alt="">
                 <p id="loggedUser" value="Login/Signup"></p>
-                <img class="avatar" onclick="login" src="/public/image/profile.png" alt="">
+                <img class="avatar" onclick="modelCheck()" src="/public/image/profile.png" alt="">
             </nav>
     </div>
     <div id="id01" class="modal">

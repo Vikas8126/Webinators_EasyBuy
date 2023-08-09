@@ -12,6 +12,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
     <title>Document</title>
+    <script>
+        function login(){
+            var loggedinUser = document.getElementById("name").value
+            localStorage.setItem("uname", loggedinUser)
+        }
+    </script>
 </head>
 <body>
     <div class="fixed-header">
@@ -41,7 +47,7 @@
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" id ="password" required>
         
-    <button type="submit" value="login">Login</button>
+    <button type="submit" value="login" onclick="login()">Login</button>
     <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
