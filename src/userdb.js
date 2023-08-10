@@ -15,6 +15,30 @@ const loginSchema = new mongoose.Schema({
     password :{
         type: String,
         required: true
+    },
+    email:{
+        type:String
+    },
+    address:{
+        type:String
+    },
+    city:{
+        type:String
+    },
+    postal:{
+        type:String
+    },
+    country:{
+        type:String
+    },
+    totalOrders:{
+        type:Number
+    },
+    age:{
+        type:Number
+    },
+    cart:{
+        type: Array
     }
 })
 
