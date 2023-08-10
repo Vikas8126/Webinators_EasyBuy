@@ -6,7 +6,7 @@ mongoose.connect(
         console.log("connection error")
     })
 
-const ProductSchema = new mongoose.Schema({
+const DesktopSchema = new mongoose.Schema({
     id : {
         type: Number,
         required: true,
@@ -40,5 +40,5 @@ const ProductSchema = new mongoose.Schema({
     }
 });
 
-const product = new mongoose.model("Product", ProductSchema);
-module.exports = product;
+const desktops = new mongoose.model("desktops", DesktopSchema);
+module.exports = desktops;

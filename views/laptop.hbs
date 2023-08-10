@@ -26,6 +26,25 @@
             location.href=  "login"
         }
     }
+    var cartItem = {}
+    var cartItems = []
+    function addToCart(img,title,discount, description, price){
+        var userName = localStorage.getItem("uname")
+        if(userName != null && userName !="Guest"){
+            cartItem={"image":img,"title":title,"discountPercentage":discount,"description":description,"price":price}
+            cartItems.push(cartItem)
+            console.log(cartItem)
+            $.post("/cart", cartItem, (data, status) => {
+                window.alert("Product successfully added to cart")
+            });
+            localStorage.setItem("cartCount",cartItems.length)
+            var counter = localStorage.getItem("cartCount")
+            console.log(counter)
+        }else{
+            location.href=  "login"
+        }
+    }
+    
     function cart(){
         var userName = localStorage.getItem("uname")
         if(userName == null || userName =="Guest"){
@@ -34,7 +53,6 @@
             location.href=  "cart"
         }
     }
-
     </script>
     <style>
         .carousel-inner>.item>img,
@@ -62,15 +80,17 @@
         </nav>
     </div>
     <div class="container" id="container" style="width: 100%!important;">
+        {{#each laptop}}
         <div class='product_card'>
-                                    <center><img style='width: 80%; height: 140px;'>
-                                        <h3 id='proName'>{{products.title}}</h3>
-                                        <p style='color: red;'>{{products.discountPercentage}}% off</p>
-                                        <p id='descrip'>{{products.description}}</p>
-                                        <h3>Price: ${{products.price}}</h3>
-                                        <button class='cartButton' onclick='addToCart(${element.title, element.id},"laptops")'>Add to Cart</button>
+                                    <center><img style='width: 80%; height: 140px;' src='{{images.[0]}}'>
+                                        <h3 id='proName'>{{title}}</h3>
+                                        <p style='color: red;'>{{discountPercentage}}% off</p>
+                                        <p id='descrip'>{{description}}</p>
+                                        <h3>Price: ${{price}}</h3>
+                                        <button type="submit" class='cartButton' onclick='addToCart("{{images.[0]}}","{{title}}","{{discountPercentage}}","{{description}}","{{price}}")'>Add to Cart</button>
                                     </center>
         </div>
+        {{/each}}
     </div>
     <div class="aboutUsSection">
         <div class="row">
@@ -113,5 +133,4 @@
         </div>
     </div>
 </body>
-
 </html>

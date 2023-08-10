@@ -816,18 +816,19 @@ height: auto;
 width: 150px;
     border-radius: 5%;
     background: rgb(255 29 0);
-    color: black;
+    color: white;
     font-size: 17px;
     padding: 10px 10px;
 }
 .modal-header{
+    position: fixed;
+    width: 100%;
     background-color: beige;
 }
 .cart-modal-title{
 font-size: 40px;
 }
 .cart-modal-body{
-max-height: 500px;
 overflow-x: hidden;
 overflow-y: auto;
 }

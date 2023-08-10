@@ -10,15 +10,14 @@ app.use(express.json());
 app.set("view engine","hbs");
 let alert = require("alert");
 const collection = require('./userdb');
-const product = require('./productdb')
+const laptops = require('./laptopdb')
+const desktops = require('./desktopdb')
+const carts = require('./cartdb')
 const async = require("hbs/lib/async");
 app.use(express.urlencoded({extended:false}))
 // app.use(express.static(path.join(__dirname, "/public")));
 const staticpath = path.join(__dirname,"../public")
 app.use('/public', express.static(staticpath))
-var products =[]
-
-
 
 
 
@@ -34,14 +33,6 @@ app.get('/login',(req, res)=>{
 
 app.get('/signup',(req, res)=>{
     res.render('signup')
-})
-
-app.get('/cart',(req, res)=>{
-    res.render('cart')
-})
-
-app.get('/desktop',(req, res)=>{
-    res.render('desktop')
 })
 
 app.get('/about',(req, res)=>{
@@ -96,8 +87,8 @@ app.post('/login',async(req, res)=>{
 
 app.get("/laptop", async (request, response) => {
     try {
-        products = await product.find({})
-        response.render('laptop',{products : products})
+        const laptop = await laptops.find({})
+        response.render('laptop',{laptop : laptop})
         
     } catch{
         response.send("No Products")
@@ -106,10 +97,40 @@ app.get("/laptop", async (request, response) => {
 });
 
 
+app.get("/desktop", async (request, response) => {
+    try {
+        const desktop = await desktops.find({})
+        response.render('desktop',{desktop : desktop})
+        
+    } catch{
+        response.send("No Products")
+    }
+    
+});
 
+app.get("/cart", async (request, response) => {
+    try {
+        const cart = await carts.find({})
+        response.render('cart',{cart : cart})
+        
+    } catch{
+        response.send("Cart Is Empty")
+    }
+    
+});
 
-
-
+app.post('/cart',async(req, res)=>{
+    
+    const data ={
+        images:req.body.image,
+        price:req.body.price,
+        title :req.body.title,
+        description: req.body.description,
+        discountPercentage: req.body.discountPercentage
+    }
+    await carts.insertMany([data])
+    res.render('cart')
+})
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');

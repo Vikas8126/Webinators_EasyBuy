@@ -37,8 +37,13 @@
         }
     }
 
-    function addToCart(){
-        document.getElementById("cartProCount").innerHTML = 2
+    function addToCart(img,title,discount, description, price){
+        var userName = localStorage.getItem("uname")
+        if(userName != null && userName !="Guest"){
+            console.log("added to cart",img,title,discount,description,price)
+        }else{
+            location.href=  "login"
+        }
     }
 
 
@@ -71,15 +76,17 @@
     </div>
 
     <div class="container" id="container" style="width: 100%!important;">
+        {{#each desktop}}
         <div class='product_card'>
-                                    <center><img style='width: 80%; height: 140px;'>
-                                        <h3 id='proName'>{{products.title}}</h3>
-                                        <p style='color: red;'>{{products.discountPercentage}}% off</p>
-                                        <p id='descrip'>{{products.description}}</p>
-                                        <h3>Price: ${{products.price}}</h3>
-                                        <button class='cartButton' onclick='addToCart()'>Add to Cart</button>
+                                    <center><img style='width: 80%; height: 140px;' src='{{images.[0]}}'>
+                                        <h3 id='proName'>{{title}}</h3>
+                                        <p style='color: red;'>{{discountPercentage}}% off</p>
+                                        <p id='descrip'>{{description}}</p>
+                                        <h3>Price: ${{price}}</h3>
+                                        <button class='cartButton' onclick='addToCart("{{images.[0]}}","{{title}}","{{discountPercentage}}","{{description}}","{{price}}")'>Add to Cart</button>
                                     </center>
         </div>
+        {{/each}}
     </div>
     <div class="aboutUsSection">
         <div class="row">
