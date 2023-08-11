@@ -16,7 +16,14 @@
     window.onload = function(){
         var userName = localStorage.getItem("uname")
         console.log(userName)
-            document.getElementById("loggedUser").innerHTML = "Welcome " + userName
+        document.getElementById("loggedUser").innerHTML = "Welcome " + userName
+        if(userName == null || userName == "Guest"){
+            document.getElementById("cartProCount").innerHTML = 0
+        }else{
+            cartCount = localStorage.getItem("cartCount")
+            document.getElementById("cartProCount").innerHTML = cartCount
+            console.log(cartCount)
+        }
     }
 
     function modelCheck(){

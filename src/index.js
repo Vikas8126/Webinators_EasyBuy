@@ -9,6 +9,7 @@ const templateView = path.join(__dirname,'../views')
 app.use(express.json());
 app.set("view engine","hbs");
 let alert = require("alert");
+let localStorage = require("localStorage");
 const collection = require('./userdb');
 const laptops = require('./laptopdb')
 const desktops = require('./desktopdb')
@@ -20,16 +21,13 @@ const staticpath = path.join(__dirname,"../public")
 app.use('/public', express.static(staticpath))
 
 
-
 app.get('/',(req, res)=>{
     res.render('home')
 })
 
-
 app.get('/login',(req, res)=>{
     res.render('login')
 })
-
 
 app.get('/signup',(req, res)=>{
     res.render('signup')
@@ -47,18 +45,19 @@ app.get('/home',(req, res)=>{
     res.render('home')
 })
 
-app.get('/profile',(req, res)=>{
+app.get('/profile',async (req,res)=>{
     res.render('profile')
 })
 
 app.post('/signup',async(req, res)=>{
     const data ={
         name: req.body.fname + ' ' + req.body.lname,
+        email:req.body.email,
         password: req.body.password
     }
     console.log(data)
-    const name = req.body.fname + ' ' + req.body.lname
-    const check = await collection.findOne({name})
+    const email = req.body.email
+    const check = await collection.findOne({email:email})
     if(check){
         alert("User already exsist please try another name")
     }
@@ -66,12 +65,13 @@ app.post('/signup',async(req, res)=>{
         alert("Signup Success! You can login now")
         await collection.insertMany([data])
         res.render('login')
+        
     }
 })
 
 app.post('/login',async(req, res)=>{
     try {
-        const check = await collection.findOne({name:req.body.name})
+        const check = await collection.findOne({email:req.body.email})
         if (check.password === req.body.password){
             alert("login Success")
             res.render('home')
@@ -108,6 +108,7 @@ app.get("/desktop", async (request, response) => {
     
 });
 
+
 app.get("/cart", async (request, response) => {
     try {
         const cart = await carts.find({})
@@ -119,6 +120,7 @@ app.get("/cart", async (request, response) => {
     
 });
 
+
 app.post('/cart',async(req, res)=>{
     
     const data ={
@@ -129,12 +131,35 @@ app.post('/cart',async(req, res)=>{
         discountPercentage: req.body.discountPercentage
     }
     await carts.insertMany([data])
-    res.render('cart')
+})
+
+
+app.post('/UpdateProfile', async(req, res)=>{
+    const data={
+        name: req.body.firstName + ' ' + req.body.lastName,
+        address: req.body.address,
+        city:req.body.city,
+        country:req.body.country,
+        email:req.body.email,
+        postal:req.body.postal,
+        password:req.body.password
+
+    }
+    const email = req.body.email
+    console.log(email)
+    const check = await collection.findOne({email:email})
+    console.log(check)
+    if(check){
+        await collection.insertMany([data])
+        console.log("rendering profile")
+        res.render('profile',{data:data})
+        alert("Profile updated successfully")
+    }
 })
 
 
 app.delete('/cart',async(req, res)=>{
-    await carts.deleteOne(req.body.title)
+    await carts.deleteOne({title:req.body.title})
     res.render('cart')
 })
 

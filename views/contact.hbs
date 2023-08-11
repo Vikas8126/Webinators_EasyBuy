@@ -14,9 +14,18 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script>
         window.onload = function(){
-            var userName = localStorage.getItem("uname")
-                document.getElementById("loggedUser").innerHTML = "Welcome " + userName
+        var userName = localStorage.getItem("uname")
+        console.log(userName)
+        document.getElementById("loggedUser").innerHTML = "Welcome " + userName
+        if(userName == null || userName == "Guest"){
+            document.getElementById("cartProCount").innerHTML = 0
+        }else{
+            cartCount = localStorage.getItem("cartCount")
+            document.getElementById("cartProCount").innerHTML = cartCount
+            console.log(cartCount)
         }
+        }
+
 
         function modelCheck(){
         var userName = localStorage.getItem("uname")

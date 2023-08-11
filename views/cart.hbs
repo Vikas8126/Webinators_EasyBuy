@@ -15,8 +15,17 @@
     <script>
     window.onload = function(){
         var userName = localStorage.getItem("uname")
-            document.getElementById("loggedUser").innerHTML = "Welcome " + userName
+        console.log(userName)
+        document.getElementById("loggedUser").innerHTML = "Welcome " + userName
+        if(userName == null || userName == "Guest"){
+            document.getElementById("cartProCount").innerHTML = 0
+        }else{
+            cartCount = localStorage.getItem("cartCount")
+            document.getElementById("cartProCount").innerHTML = cartCount
+            console.log(cartCount)
+        }
     }
+
 
     function modelCheck(){
         var userName = localStorage.getItem("uname")
@@ -36,24 +45,28 @@
                 location.href=  "cart"
             }
         }
-    var cartItem ={}
-    var cartItems=[]
-    function removeFromCart(img,title,discount, description, price){
-        var userName = localStorage.getItem("uname")
-        if(userName != null && userName !="Guest"){
-            cartItem={"image":img,"title":title,"discountPercentage":discount,"description":description,"price":price}
-            cartItems.pop(cartItem)
-            console.log(cartItem)
-            $.delete("/cart", cartItem, (data, status) => {
-                window.alert("Product removed from cart")
-            });
-            localStorage.setItem("cartCount",cartItems.length)
-            var counter = localStorage.getItem("cartCount")
-            console.log(counter)
-        }else{
-            location.href=  "login"
-        }
-    }
+
+    function removeFromCart(img,title,discount, description, price) {
+    fetch('/cart', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title: title })
+    })
+    .then(response => response.text())
+    .then(data => {
+        window.alert("Product will be removed from cart");
+        location.href='cart'
+    })
+    .catch(error => {
+        console.error(error);
+        window.alert("Error removing product from cart"); // Show an error message
+    });
+}
+
+
+
     
     </script>
 </head>
@@ -105,4 +118,10 @@
         </div>
     </div>
 </body>
+<script>
+    const cartCount = {{cart.length}}
+    console.log(cartCount)
+    localStorage.setItem("cartCount", cartCount)
+    document.getElementById("cartProCount").innerHTML = cartCount
+</script>
 </html>
