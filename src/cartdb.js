@@ -6,6 +6,9 @@ mongoose.connect(
     })
 
 const CartSchema = new mongoose.Schema({
+    email:{
+        type:String
+    },
     id : {
         type: Number,
     },

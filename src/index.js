@@ -45,9 +45,21 @@ app.get('/home',(req, res)=>{
     res.render('home')
 })
 
-app.get('/profile',async (req,res)=>{
-    res.render('profile')
-})
+
+app.get("/profile", async (request, response) => {
+    try {
+        const userEmail = request.query.email;
+        if (!userEmail) {
+            return response.send("Email parameter missing");
+        }
+        const profile = await collection.findOne({ email: userEmail }); 
+        response.render('profile', { profile: profile });
+    } catch (error) {
+        console.error(error);
+        response.send("An error occurred");
+    }
+});
+
 
 app.post('/signup',async(req, res)=>{
     const data ={
@@ -109,15 +121,23 @@ app.get("/desktop", async (request, response) => {
 });
 
 
+
+
 app.get("/cart", async (request, response) => {
     try {
-        const cart = await carts.find({})
-        response.render('cart',{cart : cart})
-        
-    } catch{
-        response.send("Cart Is Empty")
+        const userEmail = request.query.email; // Assuming you're passing email as a query parameter
+        if (!userEmail) {
+            return response.send("Email parameter missing");
+        }
+        const cart = await carts.find({ email: userEmail }); // Assuming the email is stored in the 'email' field
+        if (cart.length === 0) {
+            alert("Cart is empty please add some products")
+        }
+        response.render('cart', { cart: cart });
+    } catch (error) {
+        console.error(error);
+        response.send("An error occurred");
     }
-    
 });
 
 
@@ -127,6 +147,7 @@ app.post('/cart',async(req, res)=>{
         images:req.body.image,
         price:req.body.price,
         title :req.body.title,
+        email: req.body.email,
         description: req.body.description,
         discountPercentage: req.body.discountPercentage
     }

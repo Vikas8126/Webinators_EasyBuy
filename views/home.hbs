@@ -20,16 +20,21 @@
         if(userName == null || userName == "Guest"){
             document.getElementById("cartProCount").innerHTML = 0
         }else{
-            cartCount = localStorage.getItem("cartCount")
-            document.getElementById("cartProCount").innerHTML = cartCount
-            console.log(cartCount)
+            const cartName = "cartitem"+localStorage.getItem('email')
+            const cartCount = localStorage.getItem(cartName)
+            if(cartCount){
+                document.getElementById("cartProCount").innerHTML = cartCount
+            }else{
+                document.getElementById("cartProCount").innerHTML = 0
+            }
         }
     }
 
     function modelCheck(){
         var userName = localStorage.getItem("uname")
+        var email = localStorage.getItem("email")
         if(userName != null && userName !="Guest"){
-            location.href=  "profile"
+            location.href=  "profile?email="+email
         }else{
             location.href=  "login"
         }
@@ -37,13 +42,13 @@
 
     function cart(){
         var userName = localStorage.getItem("uname")
+        var email = localStorage.getItem("email")
         if(userName == null || userName =="Guest"){
             location.href=  "login"
         }else{
-            location.href=  "cart"
+            location.href=  "cart?email="+email;
         }
     }
-
     
     </script>
 </head>

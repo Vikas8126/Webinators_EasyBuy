@@ -18,8 +18,14 @@
             var loggedEmail = document.getElementById("email").value
             localStorage.setItem("uname", loggedinUser)
             localStorage.setItem("email", loggedEmail)
-            cartCount = localStorage.getItem("cartCount")
-            document.getElementById("cartProCount").innerHTML = cartCount
+            const cartName = "cartitem"+localStorage.getItem('email')
+            const cartCount = localStorage.getItem(cartName)
+            if(cartCount){
+                document.getElementById("cartProCount").innerHTML = cartCount
+            }else{
+                document.getElementById("cartProCount").innerHTML = 0
+            }
+            
         }
     </script>
 </head>
