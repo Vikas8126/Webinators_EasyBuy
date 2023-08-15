@@ -85,6 +85,78 @@
 </head>
 
 <body>
+    <style>
+        body {
+        font-family: Arial;
+        margin: 0;
+        }
+
+        * {
+        box-sizing: border-box;
+        }
+
+        img {
+        vertical-align: middle;
+        }
+
+        /* Position the image container (needed to position the left and right arrows) */
+        .img_container {
+        position: relative;
+        }
+
+        /* Hide the images by default */
+        .mySlides {
+        display: none;
+        }
+
+        /* Add a pointer when hovering over the thumbnail images */
+        .cursor {
+        cursor: pointer;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+        cursor: pointer;
+        position: absolute;
+        top: 40%;
+        width: auto;
+        padding: 16px;
+        margin-top: -50px;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        background-color: teal;
+        -webkit-user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+        right: 81.5rem;
+        border-radius: 3px 0 0 3px;
+        }
+        .prev {
+            margin-left: -300px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover,
+        .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+        color: black;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+        }
+
+    </style>
     <div class="fixed-header">
         <nav>
             <p1>Easy Buy</p1>
@@ -99,18 +171,27 @@
             <img class="avatar" onclick="modelCheck()" src="/public/image/profile.png" alt="">
         </nav>
     </div>
-    <div class="container" id="container" style="width: 100%!important;">
-        {{#each laptop}}
-        <div class='product_card'>
-                                    <center><img style='width: 80%; height: 140px;' src='{{images.[0]}}' onclick='productCard("{{id}}")'>
-                                        <h3 id='proName'>{{title}}</h3>
-                                        <p style='color: red;'>{{discountPercentage}}% off</p>
-                                        <p id='descrip'>{{description}}</p>
-                                        <h3>Price: ${{price}}</h3>
-                                        <button type="submit" class='cartButton' onclick='addToCart("{{images.[0]}}","{{title}}","{{discountPercentage}}","{{description}}","{{price}}")'>Add to Cart</button>
+    <div class="container row" id="container" style="width: 100%!important;">
+        <div class='product_card_page'>
+                                    <center>{{#each product.images}}
+                                        <div class="img_container">
+                                            <div class="mySlides">
+                                                <img src="{{this}}" style="width:500px">
+                                            </div> 
+                                        </div> {{/each}}
+                                        <a class="prev" onclick="plusSlides(-1)">❮</a>
+                                        <a class="next" onclick="plusSlides(1)">❯</a>
                                     </center>
         </div>
-        {{/each}}
+        <div class='product_card_page1'>
+                                    <center>
+                                        <h1>{{product.title}}</h1>
+                                        <h4>{{product.description}}</h4>
+                                        <h3 style='color: red;'>{{product.discountPercentage}}% off</h3>
+                                        <h2>Price: ${{product.price}}</h2>
+                                        <button type="submit" class='cartButton' onclick='addToCart("{{product.images.[0]}}","{{product.title}}","{{product.discountPercentage}}","{{product.description}}","{{product.price}}")'>Add to Cart</button>
+                                    </center>
+        </div>
     </div>
     <div class="aboutUsSection">
         <div class="row">
@@ -153,4 +234,27 @@
         </div>
     </div>
 </body>
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slides[slideIndex-1].style.display = "block";
+}
+</script>
 </html>

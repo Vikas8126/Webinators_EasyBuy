@@ -15,6 +15,7 @@ const laptops = require('./laptopdb')
 const desktops = require('./desktopdb')
 const carts = require('./cartdb')
 const async = require("hbs/lib/async");
+const e = require("express");
 app.use(express.urlencoded({extended:false}))
 // app.use(express.static(path.join(__dirname, "/public")));
 const staticpath = path.join(__dirname,"../public")
@@ -141,6 +142,40 @@ app.get("/cart", async (request, response) => {
 });
 
 
+app.get("/productsPageLaptop", async(req, res)=>{
+    try{
+        const id = req.query.id;
+        const product = await laptops.findOne({ id : id });
+        if (product){
+            console.log(product)
+            res.render('productPage',{product:product})
+        }else{
+            res.status(404)
+        }
+    }
+    catch(error){
+        console.error(error)
+    }
+})
+
+app.get("/productsPageDesktop", async(req, res)=>{
+    try{
+        const id = req.query.id;
+        const product = await desktops.findOne({ id : id });
+        if (product){
+            console.log(product)
+            res.render('productPage',{product:product})
+        }else{
+            res.status(404)
+        }
+    }
+    catch(error){
+        console.error(error)
+    }
+})
+
+
+
 app.post('/cart',async(req, res)=>{
     
     const data ={
@@ -153,6 +188,7 @@ app.post('/cart',async(req, res)=>{
     }
     await carts.insertMany([data])
 })
+
 
 
 app.post('/UpdateProfile', async(req, res)=>{

@@ -69,6 +69,30 @@ padding: 20px;
     box-shadow: 0 0 14px 5px rgb(225 218 218 / 20%);
 }
 
+.product_card_page{
+    margin-top: 10px;
+    background-color: white;
+    /* border-radius: 3%; */
+    padding: 15px;
+    width: 40%;
+    margin: 25px;
+    height: 425px;
+    margin-bottom: 50px;
+    display: inline-grid;
+    box-shadow: 0 0 14px 5px rgb(225 218 218 / 20%);
+}
+.product_card_page1{
+    margin-top: 10px;
+    background-color: white;
+    /* border-radius: 3%; */
+    padding: 30px;
+    width: 40%;
+    margin: 25px;
+    height: 425px;
+    margin-bottom: 50px;
+    display: inline-grid;
+    box-shadow: 0 0 14px 5px rgb(225 218 218 / 20%);
+}
 nav p1 {
 float: left;
 font-size: 28px;
@@ -790,8 +814,8 @@ overflow: hidden;
 .cartButton{
 width: 50%;
 border-radius: 5%;
-background: rgb(255, 238, 0);
-color: black;
+background: teal;
+color: white;
 font-size: 17px;
 padding: 10px 10px
 }
