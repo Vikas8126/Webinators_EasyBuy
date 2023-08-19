@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        window.onload = function(){
+        var userName = localStorage.getItem("uname")
+        console.log(userName)
+        document.getElementById("loggedUser").innerHTML = "Welcome " + userName
+        if(userName == null || userName == "Guest"){
+            document.getElementById("cartProCount").innerHTML = 0
+        }else{
+            const cartName = "cartitem"+localStorage.getItem('email')
+            const cartCount = localStorage.getItem(cartName)
+            if(cartCount){
+                document.getElementById("cartProCount").innerHTML = cartCount
+            }else{
+                document.getElementById("cartProCount").innerHTML = 0
+            }
+        }
+    }
+
+        function modelCheck(){
+        var userName = localStorage.getItem("uname")
+        var email = localStorage.getItem("email")
+        if(userName != null && userName !="Guest"){
+            location.href=  "profile?email="+email
+        }else{
+            location.href=  "login"
+        }
+    }
+
+        function cart(){
+        var userName = localStorage.getItem("uname")
+        var email = localStorage.getItem("email")
+        if(userName == null || userName =="Guest"){
+            location.href=  "login"
+        }else{
+            location.href=  "cart?email="+email;
+        }
+        }
+
+    </script>
+    <style>
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+        width: 100%;
+        margin: auto;
+    }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="fixed-header">
+            <nav>
+                <p1>Easy Buy</p1>
+                <a href="home">Home</a>
+                <a href="laptop">Laptops</a>
+                <a href="desktop">Desktops</a>
+                <a href="about">About</a>
+                <a href="contact">Contact Us</a>
+                <span class="notify-badge" id="cartProCount">0</span>
+                <img class="avatar" src="/public/image/cart.png" onclick="cart()" alt="">
+                <p id="loggedUser" value="Login/Signup"></p>
+                <img class="avatar" onclick="modelCheck()" src="/public/image/profile.png" alt="">
+            </nav>
+    </div>
+      <div class="container">
+        <section>
+            <div>
+                <h2>Hey there! What can we help you find today?</h2>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <div class="about_container">
+                        <img src="/public/image/laptops.webp" alt="Laptops">
+                        <a href="laptop" class="btn">Laptops</a>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="about_container">
+                        <img src="/public/image/buymoresavemore.jpg" alt="Desktops">
+                        <a href="desktop" class="btn">Desktops</a>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="about_container">
+                        <img src="/public/image/accessories.jpg" alt="Phones">
+                        <a href="laptop" class="btn">Accessories</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="aboutInner">
+        <div class="row">
+            <div class="card col-6">
+                <img src="/public/image/computer.jpg" alt="">
+            </div>
+            <div class="col-6">
+                <h2>About EasyBuy</h2>
+                <p>We create technologies that drive human progress
+                    Our story began with a belief and a passion: that everybody should have easy access to the best
+                    technology anywhere in the world.
+                    Today, EasyBuy is instrumental in changing the digital landscape the world over.
+                    We are among the world’s leading technology companies helping to transform people’s lives with
+                    extraordinary capabilities.
+                    From hybrid cloud solutions to high-performance computing to ambitious social impact and
+                    sustainability initiatives, what we do impacts everyone, everywhere.</p>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="benifitseasybuy">
+            <h1>Your benefits when shopping at Easy Buy Store:</h1>
+            <div class="row">
+                <div class="column">
+                    <center><img src="/public/image/freedelivery.png">
+                        <h3>Free shipping</h3>
+                        <p> When you shop at the easybuy Store, your orders are shipped free, everyday.</p>
+                    </center>
+                </div>
+                <div class="column">
+                    <center><img src="/public/image/payment.png">
+                        <h3>Easy and secure payment</h3>
+                        <p>Shop with confidence because your information is safe and secure with us.</p>
+                    </center>
+                </div>
+                <div class="column">
+                    <center><img src="/public/image/return.png">
+                        <h3>Free & Easy 30-Day Returns</h3>
+                        <p> If you are not 100% satisfied, you can simply return the product within 30 days</p>
+                    </center>
+                </div>
+                <div class="column">
+                    <center><img src="/public/image/expertadvice.jpg">
+                        <h3>Expert advice</h3>
+                        <p> Need help shopping for latest technology? Get free professional advice from us</p>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="aboutUsSection">
+        <div class="row">
+            <div class="column">
+                <h4>About Us</h4>
+                <h5>Contact Us </h5>
+                <h5>Career</h5>
+                <h5>Investor Info</h5>
+                <h5>Store Locator</h5>
+            </div>
+            <div class="column">
+                <h4>Ways to buy </h4>
+                <h5>Shop online</h5>
+                <h5>Call an EasyBuy rep</h5>
+                <h5>Find a reseller</h5>
+            </div>
+            <div class="column">
+                <h4>Support</h4>
+                <h5>Download drivers </h5>
+                <h5>Support & troubleshooting</h5>
+                <h5>Community</h5>
+                <h5>Check repair status</h5>
+            </div>
+            <div class="column">
+                <h4>EasyBuy Partners</h4>
+                <h5>EasyBuy Amplify Partner Program</h5>
+                <h5>EasyBuy Partner Portal</h5>
+                <h5>Developers</h5>
+            </div>
+        </div>
+    </div>
+    <div class="fixed-footer">
+        <div class="nav">
+            <!-- <p href="contact.html">Copyright &copy; 2016 Easy Buy</p> -->
+            <a target="_blank" href="https://www.facebook.com" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-youtube"></a>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+
+
+
