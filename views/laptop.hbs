@@ -13,6 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script>
+
     window.onload = function(){
         var userName = localStorage.getItem("uname")
         console.log(userName)
@@ -38,7 +39,7 @@
             location.href=  "login"
         }
     }
-
+    
     var cartItem = {}
     function addToCart(img,title,discount, description, price){
         var userName = localStorage.getItem("uname")
@@ -100,17 +101,7 @@
         </nav>
     </div>
     <div class="container" id="container" style="width: 100%!important;">
-        {{#each laptop}}
-        <div class='product_card'>
-                                    <center><img style='width: 80%; height: 140px;' src='{{images.[0]}}' onclick='productCard("{{id}}")'>
-                                        <h3 id='proName'>{{title}}</h3>
-                                        <p style='color: red;'>{{discountPercentage}}% off</p>
-                                        <p id='descrip'>{{description}}</p>
-                                        <h3>Price: ${{price}}</h3>
-                                        <button type="submit" class='cartButton' onclick='addToCart("{{images.[0]}}","{{title}}","{{discountPercentage}}","{{description}}","{{price}}")'>Add to Cart</button>
-                                    </center>
-        </div>
-        {{/each}}
+        products
     </div>
     <div class="aboutUsSection">
         <div class="row">
